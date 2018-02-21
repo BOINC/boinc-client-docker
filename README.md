@@ -1,4 +1,4 @@
-# docker-boinc
+# boinc-client-docker
 The BOINC client in a Docker container. The client can be accessed remotely or locally with any BOINC Manager.
 
 ## Supported tags and respective `Dockerfile` links
