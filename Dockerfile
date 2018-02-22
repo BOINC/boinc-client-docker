@@ -20,8 +20,7 @@ RUN apt update && apt install -y --no-install-recommends \
 WORKDIR /var/lib/boinc-client
 
 # Copy files
-COPY start-boinc.sh /start-boinc.sh
-RUN chmod +x /start-boinc.sh
+COPY bin/start-boinc.sh /start-boinc.sh
 
 # BOINC RPC port
 EXPOSE 31416

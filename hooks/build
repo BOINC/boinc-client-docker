@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#
+# This file is necessary to ensure that the Docker Cloud autobuild builds the
+# base Dockerfile *first*, then either of the extended versions (like `opencl`
+# or `nvidia-cuda`) since those depend on the base one. 
+#
+
+docker build -t boinc/client:latest .
+docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH .

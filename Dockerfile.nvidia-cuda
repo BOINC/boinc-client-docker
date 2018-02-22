@@ -1,0 +1,10 @@
+FROM boinc/client:latest
+
+LABEL maintainer="BOINC" \
+      description="A base container image for lightweight NVIDIA CUDA-savvy BOINC clients"
+
+RUN apt update && apt install -y --no-install-recommends \
+    boinc-client-nvidia-cuda \
+ && apt clean
+
+CMD ["/bin/bash","/start-boinc.sh"]

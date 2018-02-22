@@ -41,13 +41,12 @@ where `<host>` should be the hostname or IP address of the machine running the D
 You are also free to run `boinccmd` natively if you have it installed, rather than via Docker. 
 
 
-## Other tags
+## Other versions
 
-You can append any of the following tags to the image name in the above commands (e.g. `boinc/client:amd` or `boinc/client:nvidia` instead of just `boinc/client`) to use one of the other available container flavors,
+Instead of `boinc/client` you can use either of the following tags in the above commands to use one of the specialized container versions,
 
-- `amd` (AMD savvy BOINC client)
-- `opencl` (OpenCL-savvy BOINC client)
-- `nvidia` (NVIDIA CUDA-savvy BOINC client)
+- [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
+- [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client)
 
 
 ## Parameters
@@ -83,6 +82,6 @@ services:
 
 
 ## More Info
-- How to build it yourself: `docker build -t boinc .`
+- How to build it yourself: `docker build -t boinc/client .`
 - Shell access whilst the container is running: `docker exec -it boinc /bin/bash`
 - Monitor the logs of the container in realtime: `docker logs -f boinc`
