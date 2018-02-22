@@ -1,103 +1,88 @@
 # boinc-client-docker
+
 The BOINC client in a Docker container. The client can be accessed remotely or locally with any BOINC Manager.
 
-## Supported tags and respective `Dockerfile` links
-- [`latest`](https://github.com/BOINC/boinc-client-docker/blob/master/Dockerfile) (BOINC client)
-- [`amd`, `opencl`](https://github.com/BOINC/boinc-client-docker/blob/amd/Dockerfile) (AMD OpenCL-savvy BOINC client)
-- [`nvidia`](https://github.com/BOINC/boinc-client-docker/blob/nvidia/Dockerfile) (NVIDIA CUDA-savvy BOINC client)
 
 ## Usage
-Before you create your container, you must decide on the type of networking you wish to use.
 
-- `host` (recommended)
-- `bridge`
+The following command runs the BOINC client Docker container,
 
-### Host Networking (recommended)
-#### Docker
 ```
-docker run \
-  -d \
+docker run -d \
   --name boinc \
   --device=/dev/input/mice:/dev/input/mice \
+  --net=host \
   -v /opt/appdata/boinc:/var/lib/boinc-client \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
-  --network=host \
   boinc/client
 ```
 
-#### Docker Compose
-```
-version: '2'
-services:
+You can attach a BOINC Manager to the client by launching the BOINC Manager, going to `File > Select computer...`, and entering the IP address of the PC running the Docker container in the "Host name" field (`127.0.0.1` if running locally) as well as the password you set with `BOINC_GUI_RPC_PASSWORD` (here `123`),
 
-  boinc:
-    image: boinc/client
-    container_name: boinc
-    network_mode: host
-    restart: always
-    devices:
-      - /dev/input/mice:/dev/input/mice
-    volumes:
-      - /opt/appdata/boinc:/var/lib/boinc-client
-    environment:
-      - BOINC_GUI_RPC_PASSWORD=123
-      - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc
+![manager_connect](manager_connect.png)
+
+As usual, the client can also be controlled from the command line via the `boinccmd` command. 
+
+From the same computer as the one which is running the Docker container, you can issue commands via,
+
+```
+docker exec boinc boinccmd <args>
 ```
 
-### Bridge Networking
-#### Docker
+From other computers, you should use instead,
+
 ```
-docker run \
-  -d \
-  --name boinc \
-  --device=/dev/input/mice:/dev/input/mice \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
-  -e BOINC_GUI_RPC_PASSWORD="123" \
-  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
-  -p 31416:31416 \
-  boinc/client
+docker run --rm boinc/client boinccmd --host <host> --passwd 123 <args>
 ```
 
-#### Docker Compose
-```
-version: '2'
-services:
+where `<host>` should be the hostname or IP address of the machine running the Docker container. 
 
-  boinc:
-    image: boinc/client
-    container_name: boinc
-    restart: always
-    devices:
-      - /dev/input/mice:/dev/input/mice
-    ports:
-      - 31416:31416
-    volumes:
-      - /opt/appdata/boinc:/var/lib/boinc-client
-    environment:
-      - BOINC_GUI_RPC_PASSWORD=123
-      - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc
-```
+You are also free to run `boinccmd` natively if you have it installed, rather than via Docker. 
+
+
+## Other tags
+
+You can append any of the following tags to the image name in the above commands (e.g. `boinc/client:amd` or `boinc/client:nvidia` instead of just `boinc/client`) to use one of the other available container flavors,
+
+- `amd` (AMD savvy BOINC client)
+- `opencl` (OpenCL-savvy BOINC client)
+- `nvidia` (NVIDIA CUDA-savvy BOINC client)
+
 
 ## Parameters
-The parameters are split into two halves, separated by a colon, the left hand side representing the host and the right the container side.
 
--  `--device=/dev/input/mice:/dev/input/mice` The mouse device will be accessible within the container. The BOINC throw error without it.
+When running the client, the following parameters are available (split into two halves, separated by a colon, the left hand side representing the host and the right the container side),
+
+- `--device=/dev/input/mice:/dev/input/mice` The mouse device will be accessible within the container. The BOINC throw error without it.
 - `-v /opt/appdata/boinc:/var/lib/boinc-client` The path where you wish BOINC to store its configuration data.
 - `-e BOINC_GUI_RPC_PASSWORD="123"` The password what you need to use, when you connect to the BOINC client. 
 - `-e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"` The `--allow_remote_gui_rpc` command-line option allows connecting to the client with any IP address. If you don't want that, you can remove this parameter, but you have to use the `-e BOINC_REMOTE_HOST="IP"`.
-- `-e BOINC_REMOTE_HOST="IP"` Replace the `IP` with your IP address. In this case you can connect to the clien only from this IP.
-- `-p 31416:31416` Forwards port 31416 from the host to the container.
+- `-e BOINC_REMOTE_HOST="IP"` Replace the `IP` with your IP address. In this case you can connect to the client only from this IP.
 
-## Controlling the client
-You can control your BOINC client remotely with BOINC manager.
-`File menu > Select computer...`
-- `Host name:` The IP address of the PC which runs the docker image. If you don't use the standard `31416` port, than you hava to use the IP:PORT format. 
-- `Password:` Your chosen password.
 
-If you want to control the client on the local machine, the "Host name" will be: `127.0.0.1`
+## Docker Compose
+You can create the following `docker-compose.yml` file and from within the same directory run the client with `docker-compose up -d` to avoid the longer command from above. 
+```
+version: '2'
+services:
 
-## Docker Info
+  boinc:
+    image: boinc/client
+    container_name: boinc
+    restart: always
+    network_mode: host
+    devices:
+      - /dev/input/mice:/dev/input/mice
+    volumes:
+      - /opt/appdata/boinc:/var/lib/boinc-client
+    environment:
+      - BOINC_GUI_RPC_PASSWORD=123
+      - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc
+```
+
+
+## More Info
 - How to build it yourself: `docker build -t boinc .`
 - Shell access whilst the container is running: `docker exec -it boinc /bin/bash`
 - Monitor the logs of the container in realtime: `docker logs -f boinc`
