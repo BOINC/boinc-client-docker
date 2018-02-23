@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM ubuntu:bionic
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight BOINC clients" \
