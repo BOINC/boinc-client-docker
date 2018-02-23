@@ -43,10 +43,42 @@ You are also free to run `boinccmd` natively if you have it installed, rather th
 
 ## Other versions
 
-Instead of `boinc/client` you can use either of the following tags in the above commands to use one of the specialized container versions,
+You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead,
 
 - [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
 - [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client)
+
+
+## Swarm mode
+
+You can use a Docker Swarm to launch a large number of clients, for example across a cluster that you are using for BOINC computation. First, start the swarm and create a network,
+
+```
+docker swarm init
+docker network create -d overlay --attachable boinc
+```
+
+If you want, you can connect other nodes to your swarm by running the appropriate `docker swarm join` command on worker nodes as prompted above (although you can just run on one node too).
+
+Then launch your clients,
+```
+docker service create \
+  --replicas <N> \
+  --name boinc \
+  --network=boinc \
+  -p 31416 \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client
+```
+
+You now have `<N>` clients running, distributed across your swarm. You can issue commands to all of your clients via, 
+
+```
+docker run --rm --network boinc boinc/client boinccmd_swarm --passwd 123 <args>
+```
+
+Note you do not need to specify `--host`. The `boinccmd_swarm` command takes care of sending the command to each of the hosts in your swarm. 
 
 
 ## Parameters

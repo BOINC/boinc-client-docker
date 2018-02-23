@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for IP in $(getent hosts tasks.boinc | awk '{print $1}'); do
+    echo "===== Client at $IP ====="
+    boinccmd --host $IP "$@" 2>&1
+done

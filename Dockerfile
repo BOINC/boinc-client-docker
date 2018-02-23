@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM ubuntu:bionic
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight BOINC clients" \
@@ -11,18 +11,17 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     BOINC_CMD_LINE_OPTIONS=""
 
 # Install
-RUN apt update && apt install -y --no-install-recommends \
-    boinc-client \
- && apt clean \
- && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        boinc-client \
+    && rm -rf /var/lib/apt/lists/*
 
 # Configure
 WORKDIR /var/lib/boinc-client
 
 # Copy files
-COPY bin/start-boinc.sh /start-boinc.sh
+COPY bin/ /usr/bin/
 
 # BOINC RPC port
 EXPOSE 31416
 
-CMD ["/bin/bash","/start-boinc.sh"]
+CMD ["start-boinc.sh"]
