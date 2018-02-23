@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight BOINC clients" \
-      boinc-version="7.8.3"
+      boinc-version="7.9.2"
 
 # Global environment settings
 ENV DEBIAN_FRONTEND="noninteractive" \
