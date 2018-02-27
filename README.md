@@ -47,6 +47,23 @@ You can replace `boinc/client` above with either of the following tags to use on
 
 - [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
 - [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client)
+- [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. This version has extra installation process, check below.)
+
+### VirtualBox-savvy BOINC client usage
+
+- First you have to install the `virtualbox-dkms` package on the host.
+- You have to run the client with the `--device=/dev/vboxdrv:/dev/vboxdrv` flag.
+```
+docker run -d \
+  --name boinc \
+  --device=/dev/input/mice:/dev/input/mice \
+  --device=/dev/vboxdrv:/dev/vboxdrv \
+  --net=host \
+  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:virtualbox
+```
 
 
 ## Swarm mode

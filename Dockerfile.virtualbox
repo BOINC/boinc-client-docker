@@ -1,0 +1,8 @@
+FROM boinc/client:latest
+
+LABEL maintainer="BOINC" \
+      description="A base container image for lightweight VirtualBox-savvy BOINC clients"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        virtualbox \
+    && rm -rf /var/lib/apt/lists/*
