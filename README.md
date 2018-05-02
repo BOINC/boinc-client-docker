@@ -112,7 +112,7 @@ When running the client, the following parameters are available (split into two 
 ## Docker Compose
 You can create the following `docker-compose.yml` file and from within the same directory run the client with `docker-compose up -d` to avoid the longer command from above. 
 ```
-version: '2'
+version: '3'
 services:
 
   boinc:
