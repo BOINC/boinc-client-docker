@@ -15,11 +15,11 @@ COPY bin/ /usr/bin/
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libcurl4 \
+    adduser ca-certificates debconf libc6 libcurl4 libgcc1 libstdc++6 lsb-base zlib1g \
     && rm -rf /var/lib/apt/lists/*
 
 # Install BOINC
-RUN apt install ./usr/bin/boinc-client_7.10.2_amd64.deb
+RUN dpkg -i ./usr/bin/boinc-client_7.10.2_amd64.deb
 
 # Configure
 WORKDIR /var/lib/boinc-client
