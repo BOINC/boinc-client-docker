@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight BOINC clients" \
-      boinc-version="7.9.3"
+      boinc-version="7.10.2"
 
 # Global environment settings
 ENV DEBIAN_FRONTEND="noninteractive" \
@@ -10,16 +10,21 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     BOINC_REMOTE_HOST="127.0.0.1" \
     BOINC_CMD_LINE_OPTIONS=""
 
-# Install
+# Copy files
+COPY bin/ /usr/bin/
+
+# Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        boinc-client \
+    software-properties-common
+
+# Install BOINC Client
+RUN add-apt-repository -y ppa:costamagnagianfranco/boinc && \
+    apt-get update && apt-get install -y \
+    boinc-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure
 WORKDIR /var/lib/boinc-client
-
-# Copy files
-COPY bin/ /usr/bin/
 
 # BOINC RPC port
 EXPOSE 31416
