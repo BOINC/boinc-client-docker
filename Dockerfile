@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 COPY bin/ /usr/bin/
 
 # Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends\
+RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common
 
 # Install BOINC Client
