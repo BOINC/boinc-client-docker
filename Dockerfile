@@ -14,12 +14,14 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 COPY bin/ /usr/bin/
 
 # Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    adduser ca-certificates debconf libc6 libcurl4 libgcc1 libstdc++6 lsb-base zlib1g \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends\
+    software-properties-common
 
-# Install BOINC
-RUN dpkg -i ./usr/bin/boinc-client_7.10.2_amd64.deb
+# Install BOINC Client
+RUN add-apt-repository -y ppa:costamagnagianfranco/boinc && \
+    apt-get update && apt-get install -y \
+    boinc-client \
+    && rm -rf /var/lib/apt/lists/*
 
 # Configure
 WORKDIR /var/lib/boinc-client
