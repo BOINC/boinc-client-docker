@@ -10,7 +10,6 @@ The following command runs the BOINC client Docker container,
 ```
 docker run -d \
   --name boinc \
-  --device=/dev/input/mice:/dev/input/mice \
   --net=host \
   -v /opt/appdata/boinc:/var/lib/boinc-client \
   -e BOINC_GUI_RPC_PASSWORD="123" \
@@ -56,7 +55,6 @@ You can replace `boinc/client` above with either of the following tags to use on
 ```
 docker run -d \
   --name boinc \
-  --device=/dev/input/mice:/dev/input/mice \
   --device=/dev/vboxdrv:/dev/vboxdrv \
   --net=host \
   -v /opt/appdata/boinc:/var/lib/boinc-client \
@@ -102,7 +100,6 @@ Note you do not need to specify `--host`. The `boinccmd_swarm` command takes car
 
 When running the client, the following parameters are available (split into two halves, separated by a colon, the left hand side representing the host and the right the container side),
 
-- `--device=/dev/input/mice:/dev/input/mice` The mouse device will be accessible within the container. The BOINC throw error without it.
 - `-v /opt/appdata/boinc:/var/lib/boinc-client` The path where you wish BOINC to store its configuration data.
 - `-e BOINC_GUI_RPC_PASSWORD="123"` The password what you need to use, when you connect to the BOINC client. 
 - `-e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"` The `--allow_remote_gui_rpc` command-line option allows connecting to the client with any IP address. If you don't want that, you can remove this parameter, but you have to use the `-e BOINC_REMOTE_HOST="IP"`.
@@ -120,8 +117,6 @@ services:
     container_name: boinc
     restart: always
     network_mode: host
-    devices:
-      - /dev/input/mice:/dev/input/mice
     volumes:
       - /opt/appdata/boinc:/var/lib/boinc-client
     environment:
