@@ -42,11 +42,11 @@ You are also free to run `boinccmd` natively if you have it installed, rather th
 
 ## Other versions
 
-You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead,
+You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead.
 
-- [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
-- [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client. Check the extra installation steps below.) 
-- [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. Check the extra installation steps below.)
+- [`boinc/client:opencl`](Dockerfile.opencl) - AMD OpenCL-savvy BOINC client.
+- [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) - NVIDIA CUDA-savvy BOINC client. Check the extra installation steps [below](https://github.com/BOINC/boinc-client-docker#nvidia-cuda-savvy-boinc-client-usage).
+- [`boinc/client:virtualbox`](Dockerfile.virtualbox) - VirtualBox-savvy BOINC client. Check the extra installation steps [below](https://github.com/BOINC/boinc-client-docker#virtualbox-savvy-boinc-client-usage).
 
 ### NVIDIA CUDA-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
