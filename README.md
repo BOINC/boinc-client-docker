@@ -45,8 +45,24 @@ You are also free to run `boinccmd` natively if you have it installed, rather th
 You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead,
 
 - [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
-- [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client)
-- [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. This version has extra installation process, check below.)
+- [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client. Check the extra installation steps below.) 
+- [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. Check the extra installation steps below.)
+
+### NVIDIA CUDA-savvy BOINC client usage
+- Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
+- Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
+- Use the following command:
+```
+docker run -d \
+  --runtime=nvidia \
+  --rm nvidia/cuda \
+  --name boinc \
+  --net=host \
+  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:nvidia-cuda
+```
 
 ### VirtualBox-savvy BOINC client usage
 
@@ -62,7 +78,6 @@ docker run -d \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:virtualbox
 ```
-
 
 ## Swarm mode
 
