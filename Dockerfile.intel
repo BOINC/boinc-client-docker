@@ -3,7 +3,8 @@ FROM boinc/client:latest
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight Intel GPU-savvy BOINC clients"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
        libgl1-mesa-glx \
        libgl1-mesa-dri \
+       mesa-utils \
     && rm -rf /var/lib/apt/lists/*
