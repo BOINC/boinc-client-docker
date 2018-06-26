@@ -45,8 +45,25 @@ You are also free to run `boinccmd` natively if you have it installed, rather th
 You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead,
 
 - [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
+- [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client.
 - [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client)
 - [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. This version has extra installation process, check below.)
+
+### Intel GPU-savvy BOINC client usage
+- The X11 is necessary.
+- Run the `xhost +` command, to turn off the access control of the X.
+```
+docker run -d \
+  --name boinc \
+  --device /dev/dri:/dev/dri boinc-test
+  --net=host \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -e DISPLAY=$DISPLAY \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:intel
+```
 
 ### VirtualBox-savvy BOINC client usage
 
