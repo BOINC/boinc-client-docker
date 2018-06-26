@@ -4,7 +4,9 @@ LABEL maintainer="BOINC" \
       description="A base container image for lightweight Intel GPU-savvy BOINC clients"
 
 RUN apt-get update && apt-get install -y \
-       libgl1-mesa-glx \
-       libgl1-mesa-dri \
-       beignet-opencl-icd \
+       libgl1-mesa-glx libgl1-mesa-dri \ # Mesa libraries
+       beignet-opencl-icd \              # OpenCL library for Intel GPUs
     && rm -rf /var/lib/apt/lists/*
+
+# Users in the container (other than root) need access to the 'video' group for Mesa DRI devices.
+RUN gpasswd -a boinc video
