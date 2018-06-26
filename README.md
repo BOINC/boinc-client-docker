@@ -60,7 +60,7 @@ docker run -d \
   -v /opt/appdata/boinc:/var/lib/boinc-client \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
-  --rm boinc/client:nvidia-cuda
+  boinc/client:nvidia-cuda
 ```
 
 ### VirtualBox-savvy BOINC client usage
