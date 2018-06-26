@@ -1,4 +1,4 @@
-FROM boinc/client:latest
+FROM boinc/client:opencl
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight Intel GPU-savvy BOINC clients"
@@ -6,6 +6,5 @@ LABEL maintainer="BOINC" \
 RUN apt-get update && apt-get install -y \
        libgl1-mesa-glx \
        libgl1-mesa-dri \
-       mesa-utils \
-       xserver-xorg-video-all \
+       beignet-opencl-icd \
     && rm -rf /var/lib/apt/lists/*
