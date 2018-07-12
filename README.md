@@ -51,7 +51,7 @@ You can replace `boinc/client` above with either of the following tags to use on
 ### NVIDIA CUDA-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
-- Use the following command:
+- Run the following command:
 ```
 docker run -d \
   --runtime=nvidia \
