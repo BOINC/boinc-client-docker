@@ -51,15 +51,15 @@ You can replace `boinc/client` above with either of the following tags to use on
 
 ### Intel GPU-savvy BOINC client usage
 - The X11 is necessary.
+- Install the OpenCL driver.
 - Run the `xhost +` command, to turn off the access control of the X.
+- Run the following command.
 ```
 docker run -d \
   --name boinc \
-  --device /dev/dri:/dev/dri boinc-test
+  --device /dev/dri:/dev/dri \
   --net=host \
-  -v /tmp/.X11-unix:/tmp/.X11-unix \
   -v /opt/appdata/boinc:/var/lib/boinc-client \
-  -e DISPLAY=$DISPLAY \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:intel
