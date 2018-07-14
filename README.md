@@ -50,9 +50,8 @@ You can replace `boinc/client` above with either of the following tags to use on
 - [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. This version has extra installation process, check below.)
 
 ### Intel GPU-savvy BOINC client usage
-- The X11 is necessary.
-- Install the OpenCL driver.
-- Run the `xhost +` command, to turn off the access control of the X.
+- Install the Intel GPU Driver.
+- Install the OpenCL driver. (The container uses the `beignet-opencl-icd` package.)
 - Run the following command.
 ```
 docker run -d \
