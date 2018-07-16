@@ -1,11 +1,21 @@
+# It builds the Intel(R) Graphics Compute Runtime for OpenCL (NEO).
+FROM boinc-intel-build as builder
+
+WORKDIR /workspace/build
+
+
 FROM boinc/client
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight Intel GPU-savvy BOINC clients"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    boinc-client-opencl \
-    # OpenCL library for Intel GPUs
-    beignet-opencl-icd \
-    && rm -rf /var/lib/apt/lists/*
+    # Generic OpenCL ICD Loader
+    ocl-icd-libopencl1 && \
+    rm -rf /var/lib/apt/lists/*
 
+# Copy Intel OpenCL NEO .deb from builder
+COPY --from=builder /workspace/build/intel-opencl*.deb /usr/bin
+
+# OpenCL Driver for Intel GPUs (NEO). It supports Broadwell (5th generation) CPUs and beyond.
+RUN dpkg -i /usr/bin/intel-opencl*.deb

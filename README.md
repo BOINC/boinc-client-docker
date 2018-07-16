@@ -45,13 +45,13 @@ You are also free to run `boinccmd` natively if you have it installed, rather th
 You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead,
 
 - [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
-- [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client.
+- [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond.
+- [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) Legacy Intel GPU-savvy BOINC client. (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen)
 - [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client)
 - [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. This version has extra installation process, check below.)
 
 ### Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
-- Install the OpenCL driver. (The container uses the `beignet-opencl-icd` package.)
 - Run the following command.
 ```
 docker run -d \
@@ -62,6 +62,20 @@ docker run -d \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:intel
+```
+
+### Legacy Intel GPU-savvy BOINC client usage
+- Install the Intel GPU Driver.
+- Run the following command.
+```
+docker run -d \
+  --name boinc \
+  --device /dev/dri:/dev/dri \
+  --net=host \
+  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:intel-legacy
 ```
 
 ### VirtualBox-savvy BOINC client usage
