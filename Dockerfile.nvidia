@@ -14,13 +14,20 @@ COPY bin/ /usr/bin/
 
 # Install PPA dependency
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    software-properties-common
+    software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install BOINC Client
 RUN add-apt-repository -y ppa:costamagnagianfranco/boinc && \
-    apt-get update && apt install -y --no-install-recommends \
-    boinc-client \
-    && rm -rf /var/lib/apt/lists/*
+    apt-get update && apt-get install -y --no-install-recommends \
+    boinc-client && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Nvidia OpenCL
+RUN add-apt-repository -y ppa:graphics-drivers && \
+    apt-get update && apt-get install -y --install-recommends \
+    nvidia-opencl-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 # Configure
 WORKDIR /var/lib/boinc-client
