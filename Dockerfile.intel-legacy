@@ -1,0 +1,15 @@
+FROM boinc/client
+
+LABEL maintainer="BOINC" \
+      description="A base container image for lightweight legacy Intel GPU-savvy BOINC clients"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Generic OpenCL ICD Loader
+    ocl-icd-libopencl1 \
+    # OpenCL Driver for legacy HW platforms. Starting in Q1’2018, Beignet has been deprecated in favor of NEO OpenCL driver.
+    # - Sandybridge - 2nd Gen
+    # - Ivybridge - 3rd Gen
+    # - Haswell - 4th Gen. 
+    beignet-opencl-icd && \
+    rm -rf /var/lib/apt/lists/*
+

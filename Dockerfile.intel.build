@@ -1,0 +1,37 @@
+#########################################################################################################
+# Build insturction: https://github.com/intel/compute-runtime/blob/master/documentation/BUILD_Ubuntu.md #
+#########################################################################################################
+
+FROM ubuntu:bionic
+
+LABEL maintainer="BOINC" \
+      description="A container for building Intel Graphics Compute Runtime for OpenCL Driver (NEO)."
+
+# Configure
+WORKDIR /workspace
+
+# Install dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # NEO Dependencies
+    ccache flex bison clang-4.0 cmake g++ git patch zlib1g-dev autoconf xutils-dev libtool pkg-config libpciaccess-dev libz-dev \
+    # Git Dependencies
+    python ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+# Download sources
+RUN git clone -b release_40 https://github.com/llvm-mirror/clang clang_source && \
+    git clone https://github.com/intel/opencl-clang common_clang && \
+    git clone https://github.com/intel/llvm-patches llvm_patches && \
+    git clone -b release_40 https://github.com/llvm-mirror/llvm llvm_source && \
+    git clone https://github.com/intel/gmmlib gmmlib && \
+    git clone https://github.com/intel/intel-graphics-compiler igc && \
+    git clone https://github.com/KhronosGroup/OpenCL-Headers opencl_headers && \
+    git clone https://github.com/intel/compute-runtime neo
+
+# Build the driver
+RUN mkdir build && \
+    cd build && \
+    cmake -DBUILD_TYPE=Release -DCMAKE_BUILD_TYPE=Release -DIGC_OPTION__ARCHITECTURE_TARGET=Linux64 ../neo && \
+    make -j`nproc` package
+
+CMD ["/bin/bash"]
