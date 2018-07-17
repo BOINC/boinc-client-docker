@@ -42,13 +42,14 @@ You are also free to run `boinccmd` natively if you have it installed, rather th
 
 ## Other versions
 
-You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead,
+You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead.
 
-- [`boinc/client:opencl`](Dockerfile.opencl) (AMD OpenCL-savvy BOINC client)
 - [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond.
 - [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) Legacy Intel GPU-savvy BOINC client. (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen)
-- [`boinc/client:nvidia-cuda`](Dockerfile.nvidia-cuda) (NVIDIA CUDA-savvy BOINC client)
-- [`boinc/client:virtualbox`](Dockerfile.virtualbox) (VirtualBox-savvy BOINC client. This version has extra installation process, check below.)
+- [`boinc/client:nvidia`](Dockerfile.nvidia) - NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#nvidia-cuda-savvy-boinc-client-usage).
+- [`boinc/client:virtualbox`](Dockerfile.virtualbox) - VirtualBox-savvy BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#virtualbox-savvy-boinc-client-usage).
+- [`boinc/client:opencl`](Dockerfile.opencl) - AMD OpenCL-savvy BOINC client.
+
 
 ### Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
@@ -78,6 +79,21 @@ docker run -d \
   boinc/client:intel-legacy
 ```
 
+### NVIDIA-savvy BOINC client usage
+- Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
+- Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
+- Run the following command:
+```
+docker run -d \
+  --runtime=nvidia \
+  --name boinc \
+  --net=host \
+  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:nvidia
+```
+
 ### VirtualBox-savvy BOINC client usage
 
 - First you have to install the `virtualbox-dkms` package on the host.
@@ -92,7 +108,6 @@ docker run -d \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:virtualbox
 ```
-
 
 ## Swarm mode
 
