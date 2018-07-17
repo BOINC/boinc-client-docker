@@ -1,5 +1,5 @@
 # It builds the Intel(R) Graphics Compute Runtime for OpenCL (NEO).
-FROM boinc-intel-build as builder
+FROM boinc/client:intel.build as builder
 
 WORKDIR /workspace/build
 
