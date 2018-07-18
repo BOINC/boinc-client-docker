@@ -1,6 +1,6 @@
-# boinc-client-docker
+# BOINC client in a Docker container
 
-The BOINC client in a Docker container. The client can be accessed remotely or locally with any BOINC Manager.
+The client can be accessed remotely or locally with any BOINC Manager.
 
 
 ## Usage
@@ -53,7 +53,7 @@ You can replace `boinc/client` above with either of the following tags to use on
 
 ### Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
-- Run the following command.
+- Run the following command:
 ```
 docker run -d \
   --name boinc \
@@ -67,7 +67,7 @@ docker run -d \
 
 ### Legacy Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
-- Run the following command.
+- Run the following command:
 ```
 docker run -d \
   --name boinc \
@@ -96,8 +96,8 @@ docker run -d \
 
 ### VirtualBox-savvy BOINC client usage
 
-- First you have to install the `virtualbox-dkms` package on the host.
-- You have to run the client with the `--device=/dev/vboxdrv:/dev/vboxdrv` flag.
+- Install the `virtualbox-dkms` package on the host.
+- Run the following command:
 ```
 docker run -d \
   --name boinc \
