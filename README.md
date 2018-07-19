@@ -44,9 +44,9 @@ You are also free to run `boinccmd` natively if you have it installed, rather th
 
 You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead.
 
-- [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond.
-- [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) Legacy Intel GPU-savvy BOINC client. (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen)
-- [`boinc/client:nvidia`](Dockerfile.nvidia) - NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#nvidia-cuda-savvy-boinc-client-usage).
+- [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](https://github.com/BOINC/boinc-client-docker#intel-gpu-savvy-boinc-client-usage).
+- [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) Legacy Intel GPU-savvy BOINC client (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen). Check the usage [below](https://github.com/BOINC/boinc-client-docker#legacy-intel-gpu-savvy-boinc-client-usage).
+- [`boinc/client:nvidia`](Dockerfile.nvidia) - NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#nvidia-savvy-boinc-client-usage).
 - [`boinc/client:virtualbox`](Dockerfile.virtualbox) - VirtualBox-savvy BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#virtualbox-savvy-boinc-client-usage).
 - [`boinc/client:opencl`](Dockerfile.opencl) - AMD OpenCL-savvy BOINC client.
 
