@@ -1,17 +1,23 @@
-# It builds the Intel NEO OpenCL GPU driver.
+#############################################################
+# Builder image. It builds the Intel NEO OpenCL GPU driver. #
+#############################################################
 FROM adamradocz/intel-neo-opencl-gpu-driver-builder as builder
 
 WORKDIR /build
 
-# The main image
+##################
+# The main image #
+##################
 FROM boinc/client
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight Intel GPU-savvy BOINC clients"
 
+# Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Generic OpenCL ICD Loader
+# Generic OpenCL ICD Loader
     ocl-icd-libopencl1 && \
+# Cleaning up
     rm -rf /var/lib/apt/lists/*
 
 # Copy Intel NEO OpenCL .deb from builder

@@ -1,7 +1,7 @@
 FROM nvidia/cuda:9.2-base-ubuntu18.04
 
 LABEL maintainer="BOINC" \
-      description="A base container image for lightweight NVIDIA CUDA-savvy BOINC clients"
+      description="A base container image for lightweight NVIDIA-savvy (CUDA & OpenCL) BOINC clients"
 
 # Global environment settings
 ENV DEBIAN_FRONTEND="noninteractive" \
@@ -12,27 +12,27 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 # Copy files
 COPY bin/ /usr/bin/
 
-# Install PPA dependency
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    software-properties-common && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install BOINC Client
-RUN add-apt-repository -y ppa:costamagnagianfranco/boinc && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    boinc-client && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install Nvidia OpenCL
-RUN add-apt-repository -y ppa:graphics-drivers && \
-    apt-get update && apt-get install -y --install-recommends \
-    nvidia-opencl-dev && \
-    rm -rf /var/lib/apt/lists/*
-
 # Configure
 WORKDIR /var/lib/boinc-client
 
 # BOINC RPC port
 EXPOSE 31416
+
+# Install
+RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install PPA dependency
+    software-properties-common && \
+# Install BOINC Client
+    add-apt-repository -y ppa:costamagnagianfranco/boinc && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    boinc-client && \
+# Install Nvidia OpenCL
+    add-apt-repository -y ppa:graphics-drivers && \
+    apt-get update && apt-get install -y --install-recommends \
+    nvidia-opencl-dev && \
+# Cleaning up
+    apt-get remove -y software-properties-common && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 CMD ["start-boinc.sh"]
