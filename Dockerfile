@@ -13,20 +13,23 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 # Copy files
 COPY bin/ /usr/bin/
 
-# Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    software-properties-common
-
-# Install BOINC Client
-RUN add-apt-repository -y ppa:costamagnagianfranco/boinc && \
-    apt-get update && apt-get install -y \
-    boinc-client \
-    && rm -rf /var/lib/apt/lists/*
-
 # Configure
 WORKDIR /var/lib/boinc-client
 
 # BOINC RPC port
 EXPOSE 31416
+
+# Install
+RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install PPA dependency
+    software-properties-common && \
+# Install BOINC Client
+    add-apt-repository -y ppa:costamagnagianfranco/boinc && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    boinc-client && \
+# Cleaning up
+    apt-get remove -y software-properties-common && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 CMD ["start-boinc.sh"]
