@@ -6,5 +6,10 @@
 # or `nvidia`) since those depend on the base one. 
 #
 
+# Base image
 docker build -t boinc/client:latest .
+
+# Nvidia image. Multi GPU container depends on it.
+docker build -t boinc/client:nvidia -f Dockerfile.nvidia .
+
 docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH .
