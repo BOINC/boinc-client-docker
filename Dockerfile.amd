@@ -1,3 +1,7 @@
+###############################################################################################################
+# Install insturction: https://rocm.github.io/ROCmInstall.html                                                  #
+# ROCm Docker template: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/rocm-terminal/Dockerfile #
+###############################################################################################################
 FROM ubuntu:16.04
 
 LABEL maintainer="BOINC" \
@@ -12,20 +16,31 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 # Copy files
 COPY bin/ /usr/bin/
 
-# Install dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    software-properties-common
-
-# Install BOINC Client
-RUN add-apt-repository -y ppa:costamagnagianfranco/boinc && \
-    apt-get update && apt-get install -y \
-    boinc-client \
-    && rm -rf /var/lib/apt/lists/*
-
 # Configure
 WORKDIR /var/lib/boinc-client
 
 # BOINC RPC port
 EXPOSE 31416
+
+# Install
+RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install PPA dependency
+    software-properties-common \
+# Install ROCm dependeny
+    curl && \
+# Install BOINC Client
+    add-apt-repository -y ppa:costamagnagianfranco/boinc && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    boinc-client && \
+# Install ROCm Driver
+    curl -sL http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | apt-key add - && \
+    sh -c 'echo deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main > /etc/apt/sources.list.d/rocm.list' && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    libelf1 libnuma-dev build-essential cmake-curses-gui rocm-dev \
+    rocm-dkms && \
+# Cleaning up
+    apt-get remove -y software-properties-common curl && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 CMD ["start-boinc.sh"]
