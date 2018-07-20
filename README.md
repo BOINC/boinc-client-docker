@@ -47,9 +47,9 @@ You can replace `boinc/client` above with either of the following tags to use on
 - [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](https://github.com/BOINC/boinc-client-docker#intel-gpu-savvy-boinc-client-usage).
 - [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) Legacy Intel GPU-savvy BOINC client (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen). Check the usage [below](https://github.com/BOINC/boinc-client-docker#legacy-intel-gpu-savvy-boinc-client-usage).
 - [`boinc/client:nvidia`](Dockerfile.nvidia) - NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#nvidia-savvy-boinc-client-usage).
+- [`boinc/client:amd`](Dockerfile.amd) - AMD GPU-savvy BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#amd-savvy-boinc-client-usage).
 - [`boinc/client:multi-gpu`](Dockerfile.multi-gpu) - Intel & Nvidia-savvy BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#multi-gpu-savvy-boinc-client-usage).
 - [`boinc/client:virtualbox`](Dockerfile.virtualbox) - VirtualBox-savvy BOINC client. Check the usage [below](https://github.com/BOINC/boinc-client-docker#virtualbox-savvy-boinc-client-usage).
-- [`boinc/client:opencl`](Dockerfile.opencl) - AMD OpenCL-savvy BOINC client.
 
 
 ### Intel GPU-savvy BOINC client usage
@@ -95,6 +95,24 @@ docker run -d \
   boinc/client:nvidia
 ```
 
+### AMD-savvy BOINC client usage
+- Install the [ROCm Driver](https://rocm.github.io/ROCmInstall.html).
+- Add yourself to the video group: `sudo usermod -a -G video $LOGNAME`
+- Reboot your system.
+- Run the following command.
+```
+docker run -d \
+  --name boinc \
+  --device /dev/dri:/dev/dri \
+  --device /dev/kfd:/dev/kfd \
+  --net=host \
+  --group-add video \
+  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:amd
+```
+
 ### Multi GPU-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
@@ -110,7 +128,6 @@ docker run -d \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:multi-gpu
 ```
-
 
 ### VirtualBox-savvy BOINC client usage
 
