@@ -2,11 +2,14 @@
 
 #
 # This file is necessary to ensure that the Docker Cloud autobuild builds the
-# builder Dockerfile first, then the base Dockerfile, and finally the extended versions (like `intel`
-# or `nvidia`) since those depend on the base one or the builder one. 
+# base Dockerfile first, then the extended versions (like `intel`
+# or `nvidia`) since those depend on the base one. 
 #
 
-docker build -t boinc/client:intel.build -f Dockerfile.intel.build .
-
+# Base image
 docker build -t boinc/client:latest .
+
+# Nvidia image. Multi GPU container depends on it.
+docker build -t boinc/client:nvidia -f Dockerfile.nvidia .
+
 docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH .

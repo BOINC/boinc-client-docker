@@ -8,10 +8,10 @@ WORKDIR /build
 ##################
 # The main image #
 ##################
-FROM boinc/client
+FROM boinc/client:nvidia
 
 LABEL maintainer="BOINC" \
-      description="A base container image for lightweight Intel GPU-savvy BOINC clients"
+      description="A base container image for lightweight Multi GPU-savvy (Intel 5th gen+ & Nvidia) BOINC clients"
 
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
