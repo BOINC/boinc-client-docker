@@ -36,8 +36,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl -sL http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | apt-key add - && \
     sh -c 'echo deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main > /etc/apt/sources.list.d/rocm.list' && \
     apt-get update && apt-get install -y --no-install-recommends \
-    libelf1 libnuma-dev build-essential cmake-curses-gui rocm-dev \
-    rocm-dkms && \
+    rocm-dev && \
 # Cleaning up
     apt-get remove -y software-properties-common curl && \
     apt-get autoremove -y && \
