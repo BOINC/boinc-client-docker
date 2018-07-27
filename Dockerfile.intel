@@ -1,13 +1,3 @@
-#############################################################
-# Builder image. It builds the Intel NEO OpenCL GPU driver. #
-#############################################################
-FROM adamradocz/intel-neo-opencl-gpu-driver-builder as builder
-
-WORKDIR /build
-
-##################
-# The main image #
-##################
 FROM boinc/client
 
 LABEL maintainer="BOINC" \
@@ -15,13 +5,15 @@ LABEL maintainer="BOINC" \
 
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
-# Generic OpenCL ICD Loader
+    # Install PPA dependency
+    software-properties-common \
+    # Generic OpenCL ICD Loader
     ocl-icd-libopencl1 && \
+    # Install Intel NEO OpenCL
+    add-apt-repository -y ppa:jdanecki/intel-opencl && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    intel-opencl && \
 # Cleaning up
+    apt-get remove -y software-properties-common && \
+    apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
-
-# Copy Intel NEO OpenCL .deb from builder
-COPY --from=builder /build/intel-opencl*.deb /usr/bin
-
-# Install the Intel NEO OpenCL Driver. It supports Broadwell (5th generation) CPUs and beyond.
-RUN dpkg -i /usr/bin/intel-opencl*.deb
