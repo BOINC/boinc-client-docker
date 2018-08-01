@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # Generic OpenCL ICD Loader
     ocl-icd-libopencl1 && \
     # Install Intel NEO OpenCL
-    add-apt-repository -y ppa:jdanecki/intel-opencl && \
+    add-apt-repository -y ppa:intel-opencl/intel-opencl && \
     apt-get update && apt-get install -y --no-install-recommends \
     intel-opencl && \
 # Cleaning up
