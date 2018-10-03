@@ -1,44 +1,27 @@
-###############################################################################################################
-# Install insturction: https://rocm.github.io/ROCmInstall.html                                                  #
-# ROCm Docker template: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/rocm-terminal/Dockerfile #
-###############################################################################################################
-FROM ubuntu:16.04
+####################################################################################################################
+# Install insturction: https://rocm.github.io/ROCmInstall.html                                                     #
+# ROCm Docker base image: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/dev/Dockerfile-ubuntu-18.04 #
+# ROCm Docker template: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/rocm-terminal/Dockerfile      #
+####################################################################################################################
+FROM boinc/client
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight AMD OpenCL-savvy BOINC clients"
 
-# Global environment settings
-ENV DEBIAN_FRONTEND="noninteractive" \
-    BOINC_GUI_RPC_PASSWORD="123" \
-    BOINC_REMOTE_HOST="127.0.0.1" \
-    BOINC_CMD_LINE_OPTIONS=""
-
-# Copy files
-COPY bin/ /usr/bin/
-
-# Configure
-WORKDIR /var/lib/boinc-client
-
-# BOINC RPC port
-EXPOSE 31416
-
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
-# Install PPA dependency
-    software-properties-common \
 # Install ROCm dependeny
-    curl && \
-# Install BOINC Client
-    add-apt-repository -y ppa:costamagnagianfranco/boinc && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    boinc-client && \
+    curl \ 
+    gnupg && \
 # Install ROCm Driver
     curl -sL http://repo.radeon.com/rocm/apt/debian/rocm.gpg.key | apt-key add - && \
-    sh -c 'echo deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main > /etc/apt/sources.list.d/rocm.list' && \
+    printf "deb [arch=amd64] http://repo.radeon.com/rocm/apt/debian/ xenial main" | tee /etc/apt/sources.list.d/rocm.list && \
     apt-get update && apt-get install -y --no-install-recommends \
+    libnuma-dev \
+    libelf1 \
     rocm-dev && \
 # Cleaning up
-    apt-get remove -y software-properties-common curl && \
+    apt-get remove -y curl gnupg && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
 
