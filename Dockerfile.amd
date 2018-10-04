@@ -24,5 +24,3 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-get remove -y curl gnupg && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
-
-CMD ["start-boinc.sh"]
