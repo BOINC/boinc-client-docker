@@ -97,7 +97,6 @@ docker run -d \
 
 ### AMD-savvy BOINC client usage
 - Install the [ROCm Driver](https://rocm.github.io/ROCmInstall.html).
-- Add yourself to the video group: `sudo usermod -a -G video $LOGNAME`
 - Reboot your system.
 - Run the following command.
 ```
