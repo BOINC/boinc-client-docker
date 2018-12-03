@@ -2,6 +2,9 @@
 
 The client can be accessed remotely or locally with any BOINC Manager.
 
+## News
+
+* **Dec 3 2018:** _Breaking change!_ From version 7.10.2 [on Linux the default working directory changed to](https://boinc.berkeley.edu/wiki/Release_Notes_for_BOINC_7.10) `/var/lib/boinc` from `/var/lab/boinc-client`. We changed our images accordingly. The new images must be run with the new commands, or it won't recognize the previous data and settings.
 
 ## Usage
 
@@ -11,7 +14,7 @@ The following command runs the BOINC client Docker container,
 docker run -d \
   --name boinc \
   --net=host \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client
@@ -60,7 +63,7 @@ docker run -d \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:intel
@@ -74,7 +77,7 @@ docker run -d \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:intel-legacy
@@ -89,7 +92,7 @@ docker run -d \
   --runtime=nvidia \
   --name boinc \
   --net=host \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:nvidia
@@ -106,7 +109,7 @@ docker run -d \
   --device /dev/kfd:/dev/kfd \
   --net=host \
   --group-add video \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:amd
@@ -122,7 +125,7 @@ docker run -d \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:multi-gpu
@@ -137,7 +140,7 @@ docker run -d \
   --name boinc \
   --device=/dev/vboxdrv:/dev/vboxdrv \
   --net=host \
-  -v /opt/appdata/boinc:/var/lib/boinc-client \
+  -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:virtualbox
@@ -179,7 +182,7 @@ Note you do not need to specify `--host`. The `boinccmd_swarm` command takes car
 
 When running the client, the following parameters are available (split into two halves, separated by a colon, the left hand side representing the host and the right the container side),
 
-- `-v /opt/appdata/boinc:/var/lib/boinc-client` The path where you wish BOINC to store its configuration data.
+- `-v /opt/appdata/boinc:/var/lib/boinc` The path where you wish BOINC to store its configuration data.
 - `-e BOINC_GUI_RPC_PASSWORD="123"` The password what you need to use, when you connect to the BOINC client. 
 - `-e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"` The `--allow_remote_gui_rpc` command-line option allows connecting to the client with any IP address. If you don't want that, you can remove this parameter, but you have to use the `-e BOINC_REMOTE_HOST="IP"`.
 - `-e BOINC_REMOTE_HOST="IP"` Replace the `IP` with your IP address. In this case you can connect to the client only from this IP.
@@ -197,7 +200,7 @@ services:
     restart: always
     network_mode: host
     volumes:
-      - /opt/appdata/boinc:/var/lib/boinc-client
+      - /opt/appdata/boinc:/var/lib/boinc
     environment:
       - BOINC_GUI_RPC_PASSWORD=123
       - BOINC_CMD_LINE_OPTIONS=--allow_remote_gui_rpc

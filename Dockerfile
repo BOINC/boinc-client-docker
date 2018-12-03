@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 COPY bin/ /usr/bin/
 
 # Configure
-WORKDIR /var/lib/boinc-client
+WORKDIR /var/lib/boinc
 
 # BOINC RPC port
 EXPOSE 31416
