@@ -1,0 +1,9 @@
+.git
+.gitignore
+.github
+.dockerignore
+Dockerfile*
+docker-compose.yml
+LICENSE
+manager_connect.png
+*.md
