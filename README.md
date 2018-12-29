@@ -2,7 +2,7 @@
 
 The client can be accessed remotely or locally with any BOINC Manager.
 
-## Contents
+**Contents**
 - [News](#news)
 - [Usage](#usage)
 - [Other versions](#other-versions)
