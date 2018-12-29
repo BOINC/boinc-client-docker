@@ -2,6 +2,15 @@
 
 The client can be accessed remotely or locally with any BOINC Manager.
 
+## Contents
+- [News](#news)
+- [Usage](#usage)
+- [Other versions](#other-versions)
+- [Swarm mode](#swarm-mode)
+- [Parameters](#parameters)
+- [Docker Compose](#docker-compose)
+- [More Info](#more-info)
+
 ## News
 
 * **Dec 3 2018:** _Breaking change!_ From version 7.10.2 [on Linux the default working directory changed to](https://boinc.berkeley.edu/wiki/Release_Notes_for_BOINC_7.10) `/var/lib/boinc` from `/var/lab/boinc-client`. We changed our images accordingly. The new images must be run with the new commands, or it won't recognize the previous data and settings.
