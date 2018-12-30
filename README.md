@@ -13,7 +13,7 @@ The client can be accessed remotely or locally with any BOINC Manager.
 
 ## News
 
-* **Dec 3 2018:** _Breaking change!_ From version 7.10.2 [on Linux the default working directory changed to](https://boinc.berkeley.edu/wiki/Release_Notes_for_BOINC_7.10) `/var/lib/boinc` from `/var/lab/boinc-client`. We changed our images accordingly. The new images must be run with the new commands, or it won't recognize the previous data and settings.
+* **Dec 3 2018:** _Breaking change!_ From version 7.10.2 [on Linux the default working directory changed to](https://boinc.berkeley.edu/wiki/Release_Notes_for_BOINC_7.10) `/var/lib/boinc` from `/var/lib/boinc-client`. We changed our images accordingly. The new images must be run with the new commands, or it won't recognize the previous data and settings.
 
 ## Usage
 
@@ -58,8 +58,8 @@ You can replace `boinc/client` above with either of the following tags to use on
 
 - [`boinc/client:amd`](Dockerfile.amd) - AMD GPU-savvy BOINC client. Check the usage [below](#amd-gpu-savvy-boinc-client-usage).
 - [`boinc/client:arm32v7`](Dockerfile.arm32v7) - ARMv7 32-bit savvy BOINC client. Check the usage [below](#armv7-32-bit-savvy-boinc-client-usage).
-- [`boinc/client:intel`](Dockerfile.intel) Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](#intel-gpu-savvy-boinc-client-usage).
-- [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) Legacy Intel GPU-savvy BOINC client (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen). Check the usage [below](#legacy-intel-gpu-savvy-boinc-client-usage).
+- [`boinc/client:intel`](Dockerfile.intel) - Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](#intel-gpu-savvy-boinc-client-usage).
+- [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) - Legacy Intel GPU-savvy BOINC client (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen). Check the usage [below](#legacy-intel-gpu-savvy-boinc-client-usage).
 - [`boinc/client:multi-gpu`](Dockerfile.multi-gpu) - Intel & Nvidia-savvy BOINC client. Check the usage [below](#multi-gpu-savvy-boinc-client-usage).
 - [`boinc/client:nvidia`](Dockerfile.nvidia) - NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](#nvidia-savvy-boinc-client-usage).
 - [`boinc/client:virtualbox`](Dockerfile.virtualbox) - VirtualBox-savvy BOINC client. Check the usage [below](#virtualbox-savvy-boinc-client-usage).
