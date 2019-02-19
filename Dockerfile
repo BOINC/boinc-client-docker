@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 LABEL maintainer="BOINC" \
       description="A base container image for lightweight BOINC clients" \
-      boinc-version="7.12.0"
+      boinc-version="7.14.2"
 
 # Global environment settings
 ENV DEBIAN_FRONTEND="noninteractive" \
