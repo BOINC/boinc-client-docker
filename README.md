@@ -1,5 +1,11 @@
 # BOINC client in a Docker container
 
+[![](https://images.microbadger.com/badges/version/boinc/client.svg)](https://microbadger.com/images/boinc/client "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/boinc/client.svg)](https://microbadger.com/images/boinc/client "Get your own image badge on microbadger.com")
+![Docker Pulls](https://img.shields.io/docker/pulls/boinc/client.svg)
+![Docker Stars](https://img.shields.io/docker/stars/boinc/client.svg)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/boinc/client.svg)
+
 The client can be accessed remotely or locally with any BOINC Manager.
 
 **Contents**
