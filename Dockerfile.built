@@ -1,7 +1,7 @@
 #############################################################
 # Builder image. It builds the BOINC Client .deb file.      #
 #############################################################
-FROM boinc/builder as builder
+FROM boinc/client:builder as builder
 
 WORKDIR /build
 
