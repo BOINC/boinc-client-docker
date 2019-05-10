@@ -1,7 +1,8 @@
-FROM arm64v8/alpine:edge
+FROM alpine:edge
 
 LABEL maintainer="BOINC" \
-      description="A lightweight BOINC client on ARMv8 64-bit architecture."
+      description="Alpine baseimage for lightweight BOINC clients." \
+      boinc-version="7.14.2"
 
 # Global environment settings
 ENV BOINC_GUI_RPC_PASSWORD="123" \

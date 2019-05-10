@@ -1,7 +1,7 @@
-FROM boinc/client
+FROM boinc/client:baseimage-ubuntu
 
 LABEL maintainer="BOINC" \
-      description="A base container image for lightweight Intel GPU-savvy BOINC clients"
+      description="Intel GPU-savvy BOINC client."
 
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
