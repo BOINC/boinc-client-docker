@@ -1,7 +1,7 @@
 FROM alpine:edge
 
 LABEL maintainer="BOINC" \
-      description="Alpine baseimage for lightweight BOINC clients." \
+      description="Alpine base image for lightweight BOINC clients." \
       boinc-version="7.14.2"
 
 # Global environment settings

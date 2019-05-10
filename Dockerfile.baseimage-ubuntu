@@ -1,7 +1,7 @@
 FROM ubuntu:18.04
 
 LABEL maintainer="BOINC" \
-      description="Ubuntu baseimage for lightweight BOINC clients." \
+      description="Ubuntu base image for lightweight BOINC clients." \
       boinc-version="7.14.2"
 
 # Global environment settings
