@@ -6,7 +6,7 @@
 FROM boinc/client:baseimage-ubuntu
 
 LABEL maintainer="BOINC" \
-      description="AMD OpenCL-savvy BOINC clients."
+      description="AMD OpenCL-savvy BOINC client."
 
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
