@@ -7,7 +7,7 @@
 #
 
 # Base images
-docker build -t boinc/client:latest -f Dockerfile.baseimage-alpine .
+docker build -t boinc/client:baseimage-alpine -f Dockerfile.baseimage-alpine .
 docker build -t boinc/client:baseimage-ubuntu -f Dockerfile.baseimage-ubuntu .
 
 # Nvidia image. Multi GPU container depends on it.
