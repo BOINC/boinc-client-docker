@@ -1,17 +1,7 @@
-#############################################################
-# Builder image. It builds the BOINC Client .deb file.      #
-#############################################################
-FROM boinc/client:builder as builder
-
-WORKDIR /build
-
-##################
-# The main image #
-##################
 FROM ubuntu:18.04
 
 LABEL maintainer="BOINC" \
-      description="A base container image for lightweight BOINC clients" \
+      description="Ubuntu base image for lightweight BOINC client." \
       boinc-version="7.14.2"
 
 # Global environment settings
@@ -22,7 +12,6 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 # Copy files
 COPY bin/ /usr/bin/
-COPY --from=builder /build/boinc*.deb /usr/bin
 
 # Configure
 WORKDIR /var/lib/boinc
@@ -30,14 +19,17 @@ WORKDIR /var/lib/boinc
 # BOINC RPC port
 EXPOSE 31416
 
-# Install dependencies
+# Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libcurl4 && \
+# Install PPA dependency
+    software-properties-common && \
+# Install BOINC Client
+    add-apt-repository -y ppa:costamagnagianfranco/boinc && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    boinc-client && \
 # Cleaning up
+    apt-get remove -y software-properties-common && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
-
-# Install BOINC
-RUN dpkg -i /usr/bin/boinc*.deb
 
 CMD ["start-boinc.sh"]
