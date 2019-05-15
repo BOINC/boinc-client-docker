@@ -1,3 +1,7 @@
+##########################################################################################
+# IMPORTANT: Alpine uses musl instead of glibc, therefore projects might not support it. #
+##########################################################################################
+
 FROM alpine:edge
 
 LABEL maintainer="BOINC" \
