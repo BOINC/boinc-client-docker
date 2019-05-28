@@ -237,6 +237,6 @@ services:
 
 
 ## More Info
-- How to build it yourself: `docker build -t boinc/client .`
+- How to build it yourself: `docker build -t boinc/client -f Dockerfile.baseimage-ubuntu .`
 - Shell access whilst the container is running: `docker exec -it boinc /bin/bash`
 - Monitor the logs of the container in realtime: `docker logs -f boinc`
