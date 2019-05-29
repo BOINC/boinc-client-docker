@@ -15,6 +15,9 @@ COPY bin/ /usr/bin/
 # Configure
 WORKDIR /var/lib/boinc
 
+# Persisting data
+VOLUME /var/lib/boinc
+
 # BOINC RPC port
 EXPOSE 31416
 
