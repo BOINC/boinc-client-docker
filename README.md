@@ -209,13 +209,14 @@ Note you do not need to specify `--host`. The `boinccmd_swarm` command takes car
 
 ## Parameters
 
-When running the client, the following parameters are available (split into two halves, separated by a colon, the left hand side representing the host and the right the container side),
+When running the client, the following parameters are available (split into two halves, separated by a colon, the left hand side representing the host and the right the container side).
 
-- `-v /opt/appdata/boinc:/var/lib/boinc` The path where you wish BOINC to store its configuration data.
-- `-e BOINC_GUI_RPC_PASSWORD="123"` The password what you need to use, when you connect to the BOINC client. 
-- `-e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"` The `--allow_remote_gui_rpc` command-line option allows connecting to the client with any IP address. If you don't want that, you can remove this parameter, but you have to use the `-e BOINC_REMOTE_HOST="IP"`.
-- `-e BOINC_REMOTE_HOST="IP"` Replace the `IP` with your IP address. In this case you can connect to the client only from this IP.
-
+| Parameter | Function |
+| :--- | :--- |
+| `-e BOINC_GUI_RPC_PASSWORD="123"` | The password what you need to use, when you connect to the BOINC client.  |
+| `-e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"` | The `--allow_remote_gui_rpc` command-line option allows connecting to the client with any IP address. If you don't want that, you can remove this parameter, but you have to use the `-e BOINC_REMOTE_HOST="IP"`. |
+| `-v /opt/appdata/boinc:/var/lib/boinc` | The path where you wish BOINC to store its configuration data. |
+| `-e BOINC_REMOTE_HOST="IP"` | Replace the `IP` with your IP address. In this case you can connect to the client only from this IP. |
 
 ## Docker Compose
 You can create the following `docker-compose.yml` file and from within the same directory run the client with `docker-compose up -d` to avoid the longer command from above. 
