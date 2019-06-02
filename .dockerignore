@@ -1,9 +1,13 @@
+# Directories
 .git
-.gitignore
 .github
+
+# Files
 .dockerignore
+.env
+.gitignore
 Dockerfile*
 docker-compose.yml
 LICENSE
 manager_connect.png
-*.md
+**/*.md
