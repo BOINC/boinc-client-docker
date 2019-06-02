@@ -11,7 +11,7 @@ The client can be accessed remotely or locally with any BOINC Manager.
 **Contents**
 - [News](#news)
 - [Usage](#usage)
-- [Other versions](#other-versions)
+- [Supported Architectures and Tags](#supported-architectures-and-tags)
 - [Swarm mode](#swarm-mode)
 - [Parameters](#parameters)
 - [Docker Compose](#docker-compose)
@@ -58,20 +58,29 @@ where `<host>` should be the hostname or IP address of the machine running the D
 You are also free to run `boinccmd` natively if you have it installed, rather than via Docker. 
 
 
-## Other versions
+## Supported Architectures and Tags
 
-You can replace `boinc/client` above with either of the following tags to use one of the specialized container versions instead.
+You can specialize the `boinc/client` image with either of the following tags to use one of the specialized container version instead.
 
-- [`boinc/client:amd`](Dockerfile.amd) - AMD GPU-savvy BOINC client. Check the usage [below](#amd-gpu-savvy-boinc-client-usage).
-- [`boinc/client:arm32v7`](Dockerfile.arm32v7) - ARMv7 32-bit savvy BOINC client. Check the usage [below](#armv7-32-bit-savvy-boinc-client-usage).
-- [`boinc/client:intel`](Dockerfile.intel) - Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](#intel-gpu-savvy-boinc-client-usage).
-- [`boinc/client:intel-legacy`](Dockerfile.intel-legacy) - Legacy Intel GPU-savvy BOINC client (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen). Check the usage [below](#legacy-intel-gpu-savvy-boinc-client-usage).
-- [`boinc/client:multi-gpu`](Dockerfile.multi-gpu) - Intel & Nvidia-savvy BOINC client. Check the usage [below](#multi-gpu-savvy-boinc-client-usage).
-- [`boinc/client:nvidia`](Dockerfile.nvidia) - NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](#nvidia-savvy-boinc-client-usage).
-- [`boinc/client:virtualbox`](Dockerfile.virtualbox) - VirtualBox-savvy BOINC client. Check the usage [below](#virtualbox-savvy-boinc-client-usage).
+### x86-64
+| Tag | Info |
+| :--- | :--- |
+| [`latest`, `baseimage-ubuntu` ](Dockerfile.baseimage-ubuntu) | Ubuntu based BOINC client. All of our  **x86-64** images based on this. |
+| [`baseimage-alpine` ](Dockerfile.baseimage-alpine) | Alpine based BOINC client.  **IMPORTANT:** Alpine uses musl instead of glibc, therefore projects might not support it. |
+| [`amd`](Dockerfile.amd) | AMD GPU-savvy BOINC client. Check the usage [below](#amd-gpu-savvy-boinc-client-usage). |
+| [`intel`](Dockerfile.intel) | Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](#intel-gpu-savvy-boinc-client-usage). |
+| [`intel-legacy`](Dockerfile.intel-legacy) | Legacy Intel GPU-savvy BOINC client (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen). Check the usage [below](#legacy-intel-gpu-savvy-boinc-client-usage). |
+| [`multi-gpu`](Dockerfile.multi-gpu) | Intel & Nvidia-savvy BOINC client. Check the usage [below](#multi-gpu-savvy-boinc-client-usage). |
+| [`nvidia`](Dockerfile.nvidia) | NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](#nvidia-savvy-boinc-client-usage). |
+| [`virtualbox`](Dockerfile.virtualbox) | VirtualBox-savvy BOINC client. Check the usage [below](#virtualbox-savvy-boinc-client-usage). |
+
+### ARMv7 32-bit
+| Tag | Info |
+| :--- | :--- |
+| [`arm32v7` ](Dockerfile.arm32v7) | ARMv7 32-bit savvy BOINC client. Check the usage [below](#armv7-32-bit-savvy-boinc-client-usage). |
 
 
-### AMD GPU-savvy BOINC client usage
+#### AMD GPU-savvy BOINC client usage
 - Install the [ROCm Driver](https://rocm.github.io/ROCmInstall.html).
 - Reboot your system.
 - Run the following command.
@@ -88,20 +97,7 @@ docker run -d \
   boinc/client:amd
 ```
 
-### ARMv7 32-bit savvy BOINC client usage
-- Make sure you have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/) or you are using a [Docker friendly OS](https://blog.hypriot.com/).
-- Run the following command.
-```
-docker run -d \
-  --name boinc \
-  --net=host \
-  -v /opt/appdata/boinc:/var/lib/boinc \
-  -e BOINC_GUI_RPC_PASSWORD="123" \
-  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
-  boinc/client:arm32v7
-```
-
-### Intel GPU-savvy BOINC client usage
+#### Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
 ```
@@ -115,7 +111,7 @@ docker run -d \
   boinc/client:intel
 ```
 
-### Legacy Intel GPU-savvy BOINC client usage
+#### Legacy Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
 ```
@@ -129,7 +125,7 @@ docker run -d \
   boinc/client:intel-legacy
 ```
 
-### Multi GPU-savvy BOINC client usage
+#### Multi GPU-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
@@ -145,7 +141,7 @@ docker run -d \
   boinc/client:multi-gpu
 ```
 
-### NVIDIA-savvy BOINC client usage
+#### NVIDIA-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
@@ -160,7 +156,7 @@ docker run -d \
   boinc/client:nvidia
 ```
 
-### VirtualBox-savvy BOINC client usage
+#### VirtualBox-savvy BOINC client usage
 
 - Install the `virtualbox-dkms` package on the host.
 - Run the following command:
@@ -174,6 +170,20 @@ docker run -d \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
   boinc/client:virtualbox
 ```
+
+#### ARMv7 32-bit savvy BOINC client usage
+- Make sure you have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/) or you are using a [Docker friendly OS](https://blog.hypriot.com/).
+- Run the following command.
+```
+docker run -d \
+  --name boinc \
+  --net=host \
+  -v /opt/appdata/boinc:/var/lib/boinc \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:arm32v7
+```
+
 
 ## Swarm mode
 
@@ -217,6 +227,7 @@ When running the client, the following parameters are available (split into two 
 | `-e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"` | The `--allow_remote_gui_rpc` command-line option allows connecting to the client with any IP address. If you don't want that, you can remove this parameter, but you have to use the `-e BOINC_REMOTE_HOST="IP"`. |
 | `-v /opt/appdata/boinc:/var/lib/boinc` | The path where you wish BOINC to store its configuration data. |
 | `-e BOINC_REMOTE_HOST="IP"` | Replace the `IP` with your IP address. In this case you can connect to the client only from this IP. |
+
 
 ## Docker Compose
 You can create the following `docker-compose.yml` file and from within the same directory run the client with `docker-compose up -d` to avoid the longer command from above. 
