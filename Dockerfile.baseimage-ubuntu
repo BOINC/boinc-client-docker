@@ -5,8 +5,7 @@ LABEL maintainer="BOINC" \
       boinc-version="7.14.2"
 
 # Global environment settings
-ENV DEBIAN_FRONTEND="noninteractive" \
-    BOINC_GUI_RPC_PASSWORD="123" \
+ENV BOINC_GUI_RPC_PASSWORD="123" \
     BOINC_REMOTE_HOST="127.0.0.1" \
     BOINC_CMD_LINE_OPTIONS=""
 
