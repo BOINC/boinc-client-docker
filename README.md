@@ -65,7 +65,7 @@ You can specialize the `boinc/client` image with either of the following tags to
 ### x86-64
 | Tag | Info |
 | :--- | :--- |
-| [`latest`, `baseimage-ubuntu` ](Dockerfile.baseimage-ubuntu) | Ubuntu based BOINC client. All of our  **x86-64** images based on this. |
+| [`latest`, `baseimage-ubuntu` ](Dockerfile.baseimage-ubuntu) | Ubuntu based BOINC client. All of our  **x86-64** images are based on this. |
 | [`baseimage-alpine` ](Dockerfile.baseimage-alpine) | Alpine based BOINC client.  **IMPORTANT:** Alpine uses musl instead of glibc, therefore projects might not support it. |
 | [`amd`](Dockerfile.amd) | AMD GPU-savvy BOINC client. Check the usage [below](#amd-gpu-savvy-boinc-client-usage). |
 | [`intel`](Dockerfile.intel) | Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](#intel-gpu-savvy-boinc-client-usage). |
