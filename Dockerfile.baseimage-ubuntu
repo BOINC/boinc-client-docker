@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 LABEL maintainer="BOINC" \
       description="Ubuntu base image for lightweight BOINC client." \
-      boinc-version="7.14.2"
+      boinc-version="7.16.1"
 
 # Global environment settings
 ENV BOINC_GUI_RPC_PASSWORD="123" \
