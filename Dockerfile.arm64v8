@@ -6,7 +6,8 @@ LABEL maintainer="BOINC" \
 # Global environment settings
 ENV BOINC_GUI_RPC_PASSWORD="123" \
     BOINC_REMOTE_HOST="127.0.0.1" \
-    BOINC_CMD_LINE_OPTIONS=""
+    BOINC_CMD_LINE_OPTIONS="" \
+	DEBIAN_FRONTEND=noninteractive
 
 # Copy files
 COPY bin/ /usr/bin/
@@ -19,6 +20,8 @@ EXPOSE 31416
 
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install Time Zone Database
+	tzdata \
 # Install BOINC Client
     boinc-client && \
 # Cleaning up

@@ -6,7 +6,7 @@ FROM alpine:edge
 
 LABEL maintainer="BOINC" \
       description="Alpine base image for lightweight BOINC client." \
-      boinc-version="7.14.2"
+      boinc-version="7.16.1"
 
 # Global environment settings
 ENV BOINC_GUI_RPC_PASSWORD="123" \
@@ -24,6 +24,9 @@ EXPOSE 31416
 
 # Install
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    boinc
+# Install Time Zone Database
+	tzdata \
+# Install BOINC Client
+	boinc
 
 CMD ["start-boinc.sh"]

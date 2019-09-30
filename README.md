@@ -226,7 +226,8 @@ When running the client, the following parameters are available (split into two 
 | `-e BOINC_GUI_RPC_PASSWORD="123"` | The password what you need to use, when you connect to the BOINC client.  |
 | `-e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc"` | The `--allow_remote_gui_rpc` command-line option allows connecting to the client with any IP address. If you don't want that, you can remove this parameter, but you have to use the `-e BOINC_REMOTE_HOST="IP"`. |
 | `-v /opt/appdata/boinc:/var/lib/boinc` | The path where you wish BOINC to store its configuration data. |
-| `-e BOINC_REMOTE_HOST="IP"` | Replace the `IP` with your IP address. In this case you can connect to the client only from this IP. |
+| `-e BOINC_REMOTE_HOST="IP"` | (Optional) Replace the `IP` with your IP address. In this case you can connect to the client only from this IP. |
+| `-e TZ=Europe/London` | (Optional) Specify a time zone. The default is UTC +0. |
 
 
 ## Docker Compose
