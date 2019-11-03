@@ -74,10 +74,11 @@ You can specialize the `boinc/client` image with either of the following tags to
 | [`nvidia`](Dockerfile.nvidia) | NVIDIA-savvy (CUDA & OpenCL) BOINC client. Check the usage [below](#nvidia-savvy-boinc-client-usage). |
 | [`virtualbox`](Dockerfile.virtualbox) | VirtualBox-savvy BOINC client. Check the usage [below](#virtualbox-savvy-boinc-client-usage). |
 
-### ARMv7 32-bit
+### ARM
 | Tag | Info |
 | :--- | :--- |
 | [`arm32v7` ](Dockerfile.arm32v7) | ARMv7 32-bit savvy BOINC client. Check the usage [below](#armv7-32-bit-savvy-boinc-client-usage). |
+| [`arm64v8` ](Dockerfile.arm64v8) | ARMv8 64-bit savvy BOINC client. Check the usage [below](#armv8-64-bit-savvy-boinc-client-usage). |
 
 
 #### AMD GPU-savvy BOINC client usage
@@ -184,6 +185,18 @@ docker run -d \
   boinc/client:arm32v7
 ```
 
+#### ARMv8 64-bit savvy BOINC client usage
+- Make sure you are using a [64-bit OS on your Raspberry Pi](https://wiki.ubuntu.com/ARM/RaspberryPi#arm64) and have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/).
+- Run the following command.
+```sh
+docker run -d \
+  --name boinc \
+  --net=host \
+  -v /opt/appdata/boinc:/var/lib/boinc \
+  -e BOINC_GUI_RPC_PASSWORD="123" \
+  -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
+  boinc/client:arm64v8
+```
 
 ## Swarm mode
 
