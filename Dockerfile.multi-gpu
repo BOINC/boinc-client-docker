@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Intel NEO OpenCL
     add-apt-repository -y ppa:jdanecki/intel-opencl && \
     apt-get update && apt-get install -y --no-install-recommends \
-    intel-opencl && \
+    intel-opencl-icd && \
 # Cleaning up
     apt-get remove -y software-properties-common && \
     apt-get autoremove -y && \
