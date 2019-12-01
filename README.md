@@ -29,6 +29,7 @@ The following command runs the BOINC client Docker container,
 docker run -d \
   --name boinc \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -85,12 +86,14 @@ You can specialize the `boinc/client` image with either of the following tags to
 - Install the [ROCm Driver](https://rocm.github.io/ROCmInstall.html).
 - Reboot your system.
 - Run the following command.
+
 ```sh
 docker run -d \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --device /dev/kfd:/dev/kfd \
   --net=host \
+  --pid=host \
   --group-add video \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
@@ -101,11 +104,13 @@ docker run -d \
 #### Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
+
 ```sh
 docker run -d \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -115,11 +120,13 @@ docker run -d \
 #### Legacy Intel GPU-savvy BOINC client usage
 - Install the Intel GPU Driver.
 - Run the following command:
+
 ```sh
 docker run -d \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -130,12 +137,14 @@ docker run -d \
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
+
 ```sh
 docker run -d \
   --runtime=nvidia \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -146,11 +155,13 @@ docker run -d \
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
 - Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
 - Run the following command:
+
 ```sh
 docker run -d \
   --runtime=nvidia \
   --name boinc \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -161,11 +172,13 @@ docker run -d \
 
 - Install the `virtualbox-dkms` package on the host.
 - Run the following command:
+
 ```sh
 docker run -d \
   --name boinc \
   --device=/dev/vboxdrv:/dev/vboxdrv \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -175,10 +188,12 @@ docker run -d \
 #### ARMv7 32-bit savvy BOINC client usage
 - Make sure you have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/) or you are using a [Docker friendly OS](https://blog.hypriot.com/).
 - Run the following command.
+
 ```sh
 docker run -d \
   --name boinc \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -188,10 +203,12 @@ docker run -d \
 #### ARMv8 64-bit savvy BOINC client usage
 - Make sure you are using a [64-bit OS on your Raspberry Pi](https://wiki.ubuntu.com/ARM/RaspberryPi#arm64) and have [Docker installed on your Raspberry Pi](https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/).
 - Run the following command.
+
 ```sh
 docker run -d \
   --name boinc \
   --net=host \
+  --pid=host \
   -v /opt/appdata/boinc:/var/lib/boinc \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -210,11 +227,13 @@ docker network create -d overlay --attachable boinc
 If you want, you can connect other nodes to your swarm by running the appropriate `docker swarm join` command on worker nodes as prompted above (although you can just run on one node too).
 
 Then launch your clients,
+
 ```sh
 docker service create \
   --replicas <N> \
   --name boinc \
   --network=boinc \
+  --pid=host \
   -p 31416 \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -245,6 +264,7 @@ When running the client, the following parameters are available (split into two 
 
 ## Docker Compose
 You can create the following `docker-compose.yml` file and from within the same directory run the client with `docker-compose up -d` to avoid the longer command from above. 
+
 ```yaml
 version: '2'
 services:
@@ -254,6 +274,7 @@ services:
     container_name: boinc
     restart: always
     network_mode: host
+    pid: host
     volumes:
       - /opt/appdata/boinc:/var/lib/boinc
     environment:
