@@ -261,6 +261,7 @@ When running the client, the following parameters are available (split into two 
 | `-v /opt/appdata/boinc:/var/lib/boinc` | The path where you wish BOINC to store its configuration data. |
 | `-e BOINC_REMOTE_HOST="IP"` | (Optional) Replace the `IP` with your IP address. In this case you can connect to the client only from this IP. |
 | `-e TZ=Europe/London` | (Optional) Specify a time zone. The default is UTC +0. |
+| `--pid=host` | (Optional) Share the host’s process namespace, basically allowing processes within the container to see all of the processes on the system. Allows boinc to determine nonboinc processes for CPU percentages and exclusive applications. |
 
 
 ## Docker Compose
