@@ -233,7 +233,6 @@ docker service create \
   --replicas <N> \
   --name boinc \
   --network=boinc \
-  --pid=host \
   -p 31416 \
   -e BOINC_GUI_RPC_PASSWORD="123" \
   -e BOINC_CMD_LINE_OPTIONS="--allow_remote_gui_rpc" \
@@ -246,7 +245,9 @@ You now have `<N>` clients running, distributed across your swarm. You can issue
 docker run --rm --network boinc boinc/client boinccmd_swarm --passwd 123 <args>
 ```
 
-Note you do not need to specify `--host`. The `boinccmd_swarm` command takes care of sending the command to each of the hosts in your swarm. 
+Note you do not need to specify `--host`. The `boinccmd_swarm` command takes care of sending the command to each of the hosts in your swarm.
+
+Docker Swarm does not support `pid=host` mode. As a result, client settings related to non-boinc CPU usage or exclusion apps will not take effect. 
 
 
 ## Parameters
