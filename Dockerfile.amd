@@ -1,5 +1,5 @@
 ####################################################################################################################
-# Install insturction: https://rocm.github.io/ROCmInstall.html                                                     #
+# Install instructions: https://rocm.github.io/ROCmInstall.html                                                    #
 # ROCm Docker base image: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/dev/Dockerfile-ubuntu-18.04 #
 # ROCm Docker template: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/rocm-terminal/Dockerfile      #
 ####################################################################################################################
@@ -10,7 +10,7 @@ LABEL maintainer="BOINC" \
 
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
-# Install ROCm dependeny
+# Install ROCm dependency
     curl \
     gnupg && \
 # Install ROCm Driver
