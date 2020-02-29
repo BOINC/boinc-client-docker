@@ -1,7 +1,8 @@
 FROM boinc/client:baseimage-ubuntu
 
 LABEL maintainer="BOINC" \
-      description="Intel GPU-savvy BOINC client."
+      description="Intel GPU-savvy BOINC client." \
+      intel-opencl-version="20.07.15711"
 
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
