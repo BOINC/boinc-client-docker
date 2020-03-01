@@ -38,7 +38,7 @@ docker run -d \
 
 You can attach a BOINC Manager to the client by launching the BOINC Manager, going to `File > Select computer...`, and entering the IP address of the PC running the Docker container in the "Host name" field (`127.0.0.1` if running locally) as well as the password you set with `BOINC_GUI_RPC_PASSWORD` (here `123`),
 
-![manager_connect](manager_connect.png)
+![image](https://github.com/BOINC/boinc-client-docker/blob/master/manager_connect.png)
 
 As usual, the client can also be controlled from the command line via the `boinccmd` command. 
 
