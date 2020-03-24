@@ -66,8 +66,8 @@ You can specialize the `boinc/client` image with either of the following tags to
 ### x86-64
 | Tag | Info |
 | :--- | :--- |
-| [`latest`, `baseimage-ubuntu` ](Dockerfile.baseimage-ubuntu) | Ubuntu based BOINC client. All of our  **x86-64** images are based on this. |
-| [`baseimage-alpine` ](Dockerfile.baseimage-alpine) | Alpine based BOINC client.  **IMPORTANT:** Alpine uses musl instead of glibc, therefore projects might not support it. |
+| [`latest`, `base-ubuntu` ](Dockerfile.base-ubuntu) | Ubuntu based BOINC client. All of our  **x86-64** images are based on this. |
+| [`base-alpine` ](Dockerfile.base-alpine) | Alpine based BOINC client.  **IMPORTANT:** Alpine uses musl instead of glibc, therefore projects might not support it. |
 | [`amd`](Dockerfile.amd) | AMD GPU-savvy BOINC client. Check the usage [below](#amd-gpu-savvy-boinc-client-usage). |
 | [`intel`](Dockerfile.intel) | Intel GPU-savvy BOINC client. It supports Broadwell (5th generation) CPUs and beyond. Check the usage [below](#intel-gpu-savvy-boinc-client-usage). |
 | [`intel-legacy`](Dockerfile.intel-legacy) | Legacy Intel GPU-savvy BOINC client (Sandybridge - 2nd Gen, Ivybridge - 3rd Gen, Haswell - 4th Gen). Check the usage [below](#legacy-intel-gpu-savvy-boinc-client-usage). |
@@ -286,6 +286,6 @@ services:
 
 
 ## More Info
-- How to build it yourself: `docker build -t boinc/client -f Dockerfile.baseimage-ubuntu .`
+- How to build it yourself: `docker build -t boinc/client -f Dockerfile.base-ubuntu .`
 - Shell access whilst the container is running: `docker exec -it boinc /bin/bash`
 - Monitor the logs of the container in realtime: `docker logs -f boinc`
