@@ -5,7 +5,7 @@
 # - Ivybridge - 3rd Generation                                                    #
 # - Haswell - 4th Generation.                                                     #
 ###################################################################################
-FROM boinc/client:baseimage-ubuntu
+FROM boinc/client:base-ubuntu
 
 LABEL maintainer="BOINC" \
       description="Legacy Intel GPU-savvy BOINC client."

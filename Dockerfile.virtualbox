@@ -1,4 +1,4 @@
-FROM boinc/client:baseimage-ubuntu
+FROM boinc/client:base-ubuntu
 
 LABEL maintainer="BOINC" \
       description="VirtualBox-savvy BOINC client."
