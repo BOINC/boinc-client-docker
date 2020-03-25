@@ -1,8 +1,7 @@
 FROM intelopencl/intel-opencl:ubuntu-18.04-ppa
 
 LABEL maintainer="BOINC" \
-      description="Intel GPU-savvy BOINC client." \
-      boinc-version="7.16.1"
+      description="Intel GPU-savvy BOINC client."
 
 # Global environment settings
 ENV BOINC_GUI_RPC_PASSWORD="123" \
