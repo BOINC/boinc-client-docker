@@ -5,8 +5,7 @@
 FROM alpine:edge
 
 LABEL maintainer="BOINC" \
-      description="Alpine base image for lightweight BOINC client." \
-      boinc-version="7.16.1"
+      description="Alpine base image for lightweight BOINC client."
 
 # Global environment settings
 ENV BOINC_GUI_RPC_PASSWORD="123" \
