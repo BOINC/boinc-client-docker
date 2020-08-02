@@ -135,12 +135,12 @@ docker run -d \
 
 #### Multi GPU-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
-- Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
+- Install the Native GPU Support by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)).
 - Run the following command:
 
 ```sh
 docker run -d \
-  --runtime=nvidia \
+  --gpus all \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
@@ -153,12 +153,12 @@ docker run -d \
 
 #### NVIDIA-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
-- Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
+- Install the Native GPU Support by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)).
 - Run the following command:
 
 ```sh
 docker run -d \
-  --runtime=nvidia \
+  --gpus all \
   --name boinc \
   --net=host \
   --pid=host \
