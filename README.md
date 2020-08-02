@@ -19,7 +19,9 @@ The client can be accessed remotely or locally with any BOINC Manager.
 
 ## News
 
-* **Dec 3 2018:** _Breaking change!_ From version 7.10.2 [on Linux the default working directory changed to](https://boinc.berkeley.edu/wiki/Release_Notes_for_BOINC_7.10) `/var/lib/boinc` from `/var/lib/boinc-client`. We changed our images accordingly. The new images must be run with the new commands, or it won't recognize the previous data and settings.
+* **2020.08.02:** _Breaking change!_ The NVIDIA-Docker version 2.0 has been deprecated, the required version is Native GPU Support(https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)). Docker `run` script slightly changed too.
+
+* **2018.12.03:** _Breaking change!_ From version 7.10.2 [on Linux the default working directory changed to](https://boinc.berkeley.edu/wiki/Release_Notes_for_BOINC_7.10) `/var/lib/boinc` from `/var/lib/boinc-client`. We changed our images accordingly. The new images must be run with the new commands, or it won't recognize the previous data and settings.
 
 ## Usage
 
@@ -135,12 +137,12 @@ docker run -d \
 
 #### Multi GPU-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
-- Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
+- Install the Native GPU Support by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)).
 - Run the following command:
 
 ```sh
 docker run -d \
-  --runtime=nvidia \
+  --gpus all \
   --name boinc \
   --device /dev/dri:/dev/dri \
   --net=host \
@@ -153,12 +155,12 @@ docker run -d \
 
 #### NVIDIA-savvy BOINC client usage
 - Make sure you have installed the [NVIDIA driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver).
-- Install the NVIDIA-Docker version 2.0 by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(version-2.0)).
+- Install the Native GPU Support by following the instructions [here](https://github.com/NVIDIA/nvidia-docker/wiki/Installation-(Native-GPU-Support)).
 - Run the following command:
 
 ```sh
 docker run -d \
-  --runtime=nvidia \
+  --gpus all \
   --name boinc \
   --net=host \
   --pid=host \

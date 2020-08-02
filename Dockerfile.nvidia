@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.0-base-ubuntu18.04-rc
+FROM nvidia/cuda:11.0-base-ubuntu20.04
 
 LABEL maintainer="BOINC" \
       description="NVIDIA-savvy (CUDA & OpenCL) BOINC client."
