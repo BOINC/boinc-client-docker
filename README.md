@@ -172,7 +172,7 @@ docker run -d \
 
 #### VirtualBox-savvy BOINC client usage
 
-- Install the `virtualbox-dkms` package on the host.
+- Install the `virtualbox-dkms` package on the host. NOTE: The version of the Virtualbox must by identical (major.minor.patch) on the host and the container.
 - Run the following command:
 
 ```sh
