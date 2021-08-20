@@ -11,3 +11,4 @@ docker-compose.yml
 LICENSE
 manager_connect.png
 **/*.md
+update.sh
