@@ -3,7 +3,7 @@
 # ROCm Docker base image: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/dev/Dockerfile-ubuntu-18.04 #
 # ROCm Docker template: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/rocm-terminal/Dockerfile      #
 ####################################################################################################################
-FROM rocm/dev-ubuntu-18.04
+FROM rocm/dev-ubuntu-20.04
 
 LABEL maintainer="BOINC" \
       description="AMD OpenCL-savvy BOINC client."
