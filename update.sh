@@ -30,4 +30,5 @@ docker push boinc/client:multi-gpu
 docker build -t boinc/client:virtualbox -f Dockerfile.virtualbox .
 docker push boinc/client:virtualbox
 
+# Remove all the docker images
 docker system prune -a
