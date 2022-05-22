@@ -1,36 +1,13 @@
-FROM intelopencl/intel-opencl:ubuntu-20.04-ppa
+FROM boinc/client:base-ubuntu
 
 LABEL maintainer="BOINC" \
       description="Intel GPU-savvy BOINC client."
-
-# Global environment settings
-ENV BOINC_GUI_RPC_PASSWORD="123" \
-    BOINC_REMOTE_HOST="127.0.0.1" \
-    BOINC_CMD_LINE_OPTIONS="" \
-    DEBIAN_FRONTEND=noninteractive
-
-# Copy files
-COPY bin/ /usr/bin/
-
-# Configure
-WORKDIR /var/lib/boinc
-
-# BOINC RPC port
-EXPOSE 31416
-
 # Install
 RUN apt-get update && apt-get install -y --no-install-recommends \
-# Install PPA dependency
-    software-properties-common \
-# Install Time Zone Database
-    tzdata && \
-# Install BOINC Client
-    add-apt-repository -y ppa:costamagnagianfranco/boinc && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    boinc-client && \
+    # Generic OpenCL ICD Loader
+    ocl-icd-libopencl1 \
+# Install Intel NEO OpenCL
+    intel-opencl-icd && \
 # Cleaning up
-    apt-get remove -y software-properties-common && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
-
-CMD ["start-boinc.sh"]
