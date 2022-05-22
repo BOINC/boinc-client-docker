@@ -29,3 +29,5 @@ docker push boinc/client:multi-gpu
 # VirtualBox
 docker build -t boinc/client:virtualbox -f Dockerfile.virtualbox .
 docker push boinc/client:virtualbox
+
+docker system prune -a
