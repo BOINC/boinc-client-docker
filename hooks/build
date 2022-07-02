@@ -6,6 +6,9 @@
 # or `nvidia`) since those depend on the base one. 
 #
 
+
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
 # Base images
 docker build -t boinc/client:base-alpine -f Dockerfile.base-alpine .
 docker build -t boinc/client:base-ubuntu -f Dockerfile.base-ubuntu .
