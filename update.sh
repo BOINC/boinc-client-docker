@@ -1,6 +1,9 @@
-# Ubuntu Base
+# Ubuntu Base / latest
 docker build -t boinc/client:base-ubuntu -f Dockerfile.base-ubuntu .
 docker push boinc/client:base-ubuntu
+
+docker tag boinc/client:base-ubuntu boinc/client:latest
+docker push boinc/client:latest
 
 # Alpine Base
 docker build -t boinc/client:base-alpine -f Dockerfile.base-alpine .
