@@ -7,7 +7,19 @@ LABEL maintainer="BOINC" \
 ENV BOINC_GUI_RPC_PASSWORD="123" \
     BOINC_REMOTE_HOST="127.0.0.1" \
     BOINC_CMD_LINE_OPTIONS="" \
-	DEBIAN_FRONTEND=noninteractive
+	DEBIAN_FRONTEND=noninteractive \
+    CC_CONFIG="<cc_config> \
+    <log_flags> \
+        <task>1</task> \
+        <file_xfer>1</file_xfer> \
+        <sched_ops>1</sched_ops> \
+    </log_flags> \
+    <options> \
+        <alt_platform>arm-unknown-linux-gnueabihf</alt_platform> \
+        <alt_platform>armv7l-unknown-linux-gnueabihf</alt_platform> \
+        <alt_platform>aarch64-unknown-linux-gnu</alt_platform> \
+    </options> \
+    </cc_config>"
 
 # Copy files
 COPY bin/ /usr/bin/
