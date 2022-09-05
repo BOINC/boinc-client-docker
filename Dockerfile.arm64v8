@@ -22,6 +22,8 @@ EXPOSE 31416
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install Time Zone Database
 	tzdata \
+# libgomp1 is required by the project SiDock_At_Home
+	libgomp1 \
 # Install BOINC Client
     boinc-client && \
 # Cleaning up
