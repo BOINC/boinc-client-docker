@@ -1,6 +1,6 @@
 ####################################################################################################################
 # Install instructions: https://rocm.github.io/ROCmInstall.html                                                    #
-# ROCm Docker base image: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/dev/Dockerfile-ubuntu-18.04 #
+# ROCm Docker base image: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/dev/Dockerfile-ubuntu-22.04 #
 # ROCm Docker template: https://github.com/RadeonOpenCompute/ROCm-docker/blob/master/rocm-terminal/Dockerfile      #
 ####################################################################################################################
 FROM rocm/dev-ubuntu-22.04
