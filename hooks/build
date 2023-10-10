@@ -6,6 +6,9 @@
 # or `nvidia`) since those depend on the base one. 
 #
 
+# Enable builds across architectures (i.e. arm32v7 and arm64v8 on amd64)
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+
 # Base images
 docker build -t boinc/client:base-alpine -f Dockerfile.base-alpine .
 docker build -t boinc/client:base-ubuntu -f Dockerfile.base-ubuntu .
