@@ -1,4 +1,4 @@
-FROM boinc/client:nvidia
+FROM taknok/boinc-nvidia:latest
 
 LABEL maintainer="BOINC" \
       description="Multi GPU-savvy (Intel 5th gen+ & Nvidia) BOINC client."

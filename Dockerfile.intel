@@ -1,4 +1,4 @@
-FROM boinc/client:base-ubuntu
+FROM taknok/boinc:latest
 
 LABEL maintainer="BOINC" \
       description="Intel GPU-savvy BOINC client."
