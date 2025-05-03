@@ -53,7 +53,7 @@ jobs:
       platforms: linux/amd64
     secrets: inherit
 
-virtualbox:
+  virtualbox:
     needs:
       - set-date
       - base
