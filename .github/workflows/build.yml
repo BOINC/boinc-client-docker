@@ -43,13 +43,24 @@ jobs:
     secrets: inherit
 
   intel:
-    needs: 
+    needs:
       - set-date
       - base
     uses: ./.github/workflows/docker-build.yml
     with:
       dockerfile: Dockerfile.intel
       tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-intel:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc-intel:${{ needs.set-date.outputs.date }}
+      platforms: linux/amd64
+    secrets: inherit
+
+virtualbox:
+    needs:
+      - set-date
+      - base
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile.virtualbox
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-virtualbox:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc-virtualbox:${{ needs.set-date.outputs.date }}
       platforms: linux/amd64
     secrets: inherit
 
