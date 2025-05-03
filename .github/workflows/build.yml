@@ -1,0 +1,85 @@
+name: ci
+
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron: "0 7 7 * *"
+
+jobs:
+  set-date:
+    runs-on: ubuntu-latest
+    outputs:
+      date: ${{ steps.date.outputs.DATE }}
+    steps:
+      - name: Set Date
+        id: date
+        run: echo "DATE=$(date +"%m-%Y")" >> $GITHUB_OUTPUT
+
+  base:
+    needs: set-date
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc:${{ needs.set-date.outputs.date }}
+      platforms: linux/amd64,linux/arm64,linux/arm/v7
+    secrets: inherit
+
+  alpine:
+    needs: set-date
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile.alpine
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-alpine:edge,${{ vars.DOCKERHUB_USERNAME }}/boinc-alpine:${{ needs.set-date.outputs.date }}
+      platforms: linux/amd64,linux/arm64,linux/arm/v7
+    secrets: inherit
+
+  AMD:
+    needs: set-date
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile.amd
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-amd:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc-amd:${{ needs.set-date.outputs.date }}
+    secrets: inherit
+
+  intel:
+    needs:
+      - set-date
+      - base
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile.intel
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-intel:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc-intel:${{ needs.set-date.outputs.date }}
+      platforms: linux/amd64
+    secrets: inherit
+
+  virtualbox:
+    needs:
+      - set-date
+      - base
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile.virtualbox
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-virtualbox:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc-virtualbox:${{ needs.set-date.outputs.date }}
+      platforms: linux/amd64
+    secrets: inherit
+
+  nvidia:
+    needs: set-date
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile.nvidia
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-nvidia:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc-nvidia:${{ needs.set-date.outputs.date }}
+      platforms: linux/amd64,linux/arm64
+    secrets: inherit
+
+  multi-gpu:
+    needs:
+      - set-date
+      - nvidia
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      dockerfile: Dockerfile.multi-gpu
+      tag: ${{ vars.DOCKERHUB_USERNAME }}/boinc-multi-gpu:latest,${{ vars.DOCKERHUB_USERNAME }}/boinc-multi-gpu:${{ needs.set-date.outputs.date }}
+      platforms: linux/amd64
+    secrets: inherit
