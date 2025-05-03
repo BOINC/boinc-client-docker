@@ -1,4 +1,4 @@
-FROM taknok/boinc:latest
+FROM boinc/boinc:latest
 
 LABEL maintainer="BOINC" \
       description="Intel GPU-savvy BOINC client."
