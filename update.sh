@@ -34,11 +34,11 @@ docker push boinc/client:virtualbox
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
 # Arm32v7
-docker build -t boinc/client:arm32v7 -f Dockerfile.arm32v7 .
+docker build --platform=linux/arm/v7 -t boinc/client:arm32v7 -f Dockerfile.arm32v7 .
 docker push boinc/client:arm32v7
 
 # Arm64v8
-docker build -t boinc/client:arm64v8 -f Dockerfile.arm64v8 .
+docker build --platform=linux/arm64/v8 -t boinc/client:arm64v8 -f Dockerfile.arm64v8 .
 docker push boinc/client:arm64v8
 
 # Remove all the docker images
